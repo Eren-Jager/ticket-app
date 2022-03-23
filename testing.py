@@ -34,26 +34,22 @@ while(True):
     table = soup.find('ul', attrs = {'id':'venuelist'})
 
     for row in table.findAll("li", attrs = {'class':'list'}):
-        theatres_rrr[row['data-id']]= row['data-name']
-
-    rrr_codes= list(theatres_rrr.keys())
-    #rrr_codes.append('PVSF')
-
-    if 'PVSF' in rrr_codes:
-        print("tickets available")
-        port = 465  # For SSL
-        smtp_server = "smtp.gmail.com"
-        sender_email = "yagtester123@gmail.com"  # Enter your address
-        receiver_email = "kviswanth96@gmail.com"  # Enter receiver address
-        password = 'testingtesting'
-        message = "movie tickets are now available"
-
-        context = ssl.create_default_context()
-        with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
-            server.login(sender_email, password)
-            server.sendmail(sender_email, receiver_email, message)
-    else :
-        print("Better luck next time")
-        
+        if row['data-id'] == 'PVSF':
+            if len(row.findAll("div", attrs = {'class':'showtime-pill-container'})) > 11:
+                print("tickets available")
+                port = 465  # For SSL
+                smtp_server = "smtp.gmail.com"
+                sender_email = "yagtester123@gmail.com"  # Enter your address
+                receiver_email = "kviswanth96@gmail.com"  # Enter receiver address
+                password = 'testingtesting'
+                message = "movie tickets are now available"
+                context = ssl.create_default_context()
+                with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+                    server.login(sender_email, password)
+                    server.sendmail(sender_email, receiver_email, message)
+            else :
+                print("Better luck next time")
+            break
+       
     time.sleep(30)
 
