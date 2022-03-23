@@ -35,7 +35,7 @@ while(True):
 
     for row in table.findAll("li", attrs = {'class':'list'}):
         if row['data-id'] == 'PVSF':
-            if len(row.findAll("div", attrs = {'class':'showtime-pill-container'})) == 11:
+            if len(row.findAll("div", attrs = {'class':'showtime-pill-container'})) > 11:
                 print("tickets available")
                 port = 465  # For SSL
                 smtp_server = "smtp.gmail.com"
